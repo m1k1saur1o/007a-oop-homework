@@ -15,8 +15,7 @@ public class POO_01 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //intento de push de parte de Andrea
-        //segundo mensaje de prueba
+        //eliminando mensajes verificando token
     }
     
 }
