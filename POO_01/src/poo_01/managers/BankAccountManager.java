@@ -29,4 +29,19 @@ public class BankAccountManager {
         }
         return instance;
     }
+    
+     public boolean agregarCliente(Client cliente) {
+        if (clients.containsKey(cliente.getRut())) {
+            return false;
+        }
+        clients.put(cliente.getRut(), cliente);
+        return true;
+    }
+    
+    public Client buscarCliente(String rut) {
+        return clients.get(rut);
+    }
+    
+    
+    
 }
