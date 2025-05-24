@@ -19,9 +19,69 @@ public class Menu {
     //           en el manager? ¿Por qué el menu que es una vista lo hace?
     private final Scanner scanner;
     private final BankAccountManager bankAccountManager;
+    private Client clienteActual;
+
 
     public Menu() {
         scanner = new Scanner(System.in);
         bankAccountManager = BankAccountManager.getInstance();
-    }    
+        clienteActual = null;
+    }   
+    
+     public void mostrarMenu() {
+        int opcion;
+        do {
+            System.out.println("\n===== SISTEMA DE GESTIÓN DE HOTEL =====");
+            System.out.println("\n=======================================");
+            System.out.println("1. Registrar cliente");
+            System.out.println("2. Ver datos del cliente");
+            System.out.println("3. Depositar ");
+            System.out.println("4. Girar");
+            System.out.println("5. Consultar Saldo");
+            System.out.println("6. Salir");
+            System.out.print("Ingrese una opción: ");
+            
+            try {
+                opcion = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                opcion = 0;
+            }
+            
+            switch (opcion) {
+                case 1:
+                    //registrarCliente();
+                    break;
+                case 2:
+                    verDatosCliente();
+                    break;
+                case 3:
+                    //agregarDeposito();
+                    break;
+                case 4:
+                    //realizarGiro();
+                    break;
+                case 5:
+                    //consultarSaldo();
+                    break;
+                case 6:
+                    System.out.println("Gracias por usar el sistema de gestión de hotel");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+            }
+            
+        } while (opcion != 6);
+    }
+     
+    //opcion2 
+    private void verDatosCliente() {
+        if (clienteActual == null) {
+            System.out.println("Primero debe registrar un cliente");
+            return;
+        }
+        
+        System.out.println();
+        clienteActual.mostrarInformacion();
+    }   
+     
 }
