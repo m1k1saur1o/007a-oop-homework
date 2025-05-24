@@ -27,6 +27,13 @@ public class Client {
             String city, 
             String phone, 
             Account account) {
+        
+        
+        if (!validarRut(rut))   {
+            throw new IllegalArgumentException("RUT no válido");
+        }
+              
+              
         this.rut = rut;
         this.name = name;
         this.firstLastName = firstLastName;
@@ -37,6 +44,18 @@ public class Client {
         this.account = account;
     }
 
+    
+    private boolean validarRut(String rut) {
+        if (rut == null || rut.isEmpty()) {
+            return false;
+        }
+        return rut.length() == 9;
+    }
+    
+    
+    
+    //Getters y setter
+        
     public String getRut() {
         return rut;
     }
