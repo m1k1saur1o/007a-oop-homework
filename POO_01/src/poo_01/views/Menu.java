@@ -6,6 +6,8 @@ package poo_01.views;
 
 import java.util.Scanner;
 import poo_01.managers.BankAccountManager;
+import poo_01.models.Account;
+import poo_01.models.Client;
 
 /**
  *
@@ -31,8 +33,8 @@ public class Menu {
      public void mostrarMenu() {
         int opcion;
         do {
-            System.out.println("\n===== SISTEMA DE GESTIÓN DE HOTEL =====");
-            System.out.println("\n=======================================");
+            System.out.println("\n========= MENU =========");
+            System.out.println("\n========================");
             System.out.println("1. Registrar cliente");
             System.out.println("2. Ver datos del cliente");
             System.out.println("3. Depositar ");
@@ -49,7 +51,7 @@ public class Menu {
             
             switch (opcion) {
                 case 1:
-                    //registrarCliente();
+                    registrarCliente();
                     break;
                 case 2:
                     verDatosCliente();
@@ -72,6 +74,46 @@ public class Menu {
             
         } while (opcion != 6);
     }
+     
+    private void registrarCliente() {
+        System.out.println("\n===== REGISTRO DE CLIENTE =====");
+        System.out.print("Ingrese RUT: ");
+        String rut = scanner.nextLine();
+        
+        // Verificar si el cliente ya existe
+        if (bankAccountManager.buscarCliente(rut) != null) {
+            System.out.println("Error: Ya existe un cliente con ese RUT");
+            return;
+        }
+        
+        System.out.print("Ingrese nombre: ");
+        String name = scanner.nextLine();
+        System.out.print("Ingrese apellido paterno: ");
+        String firstLastName = scanner.nextLine();
+        System.out.print("Ingrese apellido materno: ");
+        String secondLastName = scanner.nextLine();
+        System.out.print("Ingrese domicilio: ");
+        String address = scanner.nextLine();
+        System.out.print("Ingrese comuna: ");
+        String city = scanner.nextLine();
+        System.out.print("Ingrese telefono: ");
+        String phone = scanner.nextLine();
+        System.out.print("Ingrese N cuenta corriente: ");
+        String accountNumber = scanner.nextLine(); 
+        
+        Account account = new Account(accountNumber);
+        
+        try {
+            Client nuevoCliente = new Client( rut, name, firstLastName, secondLastName, address, city, phone, account);
+            if (nuevoCliente.registrarCliente() && bankAccountManager.agregarCliente(nuevoCliente)) {
+                System.out.println("Cliente registrado exitosamente");
+                clienteActual = nuevoCliente;
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+     
      
     //opcion2 
     private void verDatosCliente() {
