@@ -4,6 +4,8 @@
  */
 package poo_01;
 
+import poo_01.views.Menu;
+
 /**
  *
  * @author Andrea
