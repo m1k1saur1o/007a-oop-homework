@@ -11,8 +11,17 @@ package poo_01.models;
 public class Account {
     private final String accountNumber;
     private int balance;
+    
+   
+    
 
     public Account(String accountNumber) {
+        
+        if(!validarCuenta(accountNumber)){
+            throw new IllegalArgumentException("El numero de cuenta debe tener exactamente 9 digitos");
+        }
+         
+         
         this.accountNumber = accountNumber;
         this.balance = 0;
     }
@@ -31,11 +40,11 @@ public class Account {
         return false;
     }
     
-    private boolean validarCuenta(String rut) {
-        if (rut == null || rut.isEmpty()) {
+    private boolean validarCuenta(String accountNumber) {
+        if (accountNumber == null || accountNumber.isEmpty()) {
             return false;
         }
-        return rut.length() = 9;
+        return accountNumber.length() == 9;
     }
         
     public String getAccountNumber() {
