@@ -52,7 +52,32 @@ public class Client {
         return rut.length() == 9;
     }
     
+        public boolean agregarCuenta(String accountNumber) {
+        if (this.account != null)   {
+            System.out.println("El cliente ya tiene una cuenta activa");
+            return false;
+        }
+        
+        this.account = new Account(accountNumber);
+        System.out.println("Reserva agregada correctamente");
+        return true;
+    }
+        
+        
     
+       public void mostrarInformacion() {
+        System.out.println("========== INFORMACIÓN DEL CLIENTE ==========");
+        System.out.println("RUT: " + this.rut);
+        System.out.println("Nombre completo: " + name + " " + firstLastName);
+        
+        if (this.account != null) {
+            System.out.println("\n========== INFORMACIÓN DE LA CUENTA ==========");
+            this.account.mostrarInformacion();
+        } else {
+            System.out.println("\nEl cliente no tiene cuenta activa");
+        }
+        
+    }
     
     //Getters y setter
         
