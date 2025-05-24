@@ -19,7 +19,7 @@ public class Account {
 
     
     public void mostrarInformacion() {
-        System.out.println("Número de cuenta: " + this.accountNumber);
+        System.out.println("Numero de cuenta: " + this.accountNumber);
         System.out.println("Saldo Actual: " + this.balance);
     }
     
@@ -31,6 +31,13 @@ public class Account {
         return false;
     }
     
+    private boolean validarCuenta(String rut) {
+        if (rut == null || rut.isEmpty()) {
+            return false;
+        }
+        return rut.length() = 9;
+    }
+        
     public String getAccountNumber() {
         return accountNumber;
     }
