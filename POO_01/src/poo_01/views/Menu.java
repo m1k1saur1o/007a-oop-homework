@@ -41,7 +41,7 @@ public class Menu {
             System.out.println("4. Girar");
             System.out.println("5. Consultar Saldo");
             System.out.println("6. Salir");
-            System.out.print("Ingrese una opción: ");
+            System.out.print("Ingrese una opcion: ");
             
             try {
                 opcion = Integer.parseInt(scanner.nextLine());
@@ -57,19 +57,19 @@ public class Menu {
                     verDatosCliente();
                     break;
                 case 3:
-                    //agregarDeposito();
+                    agregarDeposito();
                     break;
                 case 4:
-                    //realizarGiro();
+                    realizarGiro();
                     break;
                 case 5:
-                    //consultarSaldo();
+                    consultarSaldo();
                     break;
                 case 6:
-                    System.out.println("Gracias por usar el sistema de gestión de hotel");
+                    System.out.println("Gracias por usar el sistema de Bank Boston.");
                     break;
                 default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
+                    System.out.println("Opcion invalida. Intente nuevamente.");
             }
             
         } while (opcion != 6);
