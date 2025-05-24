@@ -143,5 +143,27 @@ public class Menu {
         System.out.println("Depósito exitoso. Saldo actual: $" + clienteActual.getAccount().getBalance() );
     }
         
+    private void realizarGiro(){
+        if(clienteActual == null){
+            System.out.println("Primero debes registrar un cliente.");
+        return;      
+        }
+        
+        System.out.println("Ingrese un monto a retirar: ");
+        int monto = Integer.parseInt(scanner.nextLine());
+        
+        if(monto<=0){
+            System.out.println("El monto debe ser mayor a cero.");
+            return;
+        }
+        
+        boolean exito = clienteActual.getAccount().hacerGiro(monto);
+        if(exito){
+            System.out.println("Giro realizado. Saldo actual $ " + clienteActual.getAccount().getBalance() );
+        } else{
+              System.out.println("Fondos insuficientes. Saldo actual $ " + clienteActual.getAccount().getBalance() );
+        }
+        
+    }
      
 }
