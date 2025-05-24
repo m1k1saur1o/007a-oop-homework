@@ -17,6 +17,20 @@ public class Account {
         this.balance = 0;
     }
 
+    
+    public void mostrarInformacion() {
+        System.out.println("Número de cuenta: " + this.accountNumber);
+        System.out.println("Saldo Actual: " + this.balance);
+    }
+    
+    public boolean hacerGiro(int monto){
+        if(monto <= balance){
+            balance -= monto;
+            return true;
+        }
+        return false;
+    }
+    
     public String getAccountNumber() {
         return accountNumber;
     }
