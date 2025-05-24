@@ -10,11 +10,11 @@ package poo_01.models;
  */
 public class Client {
     private final String rut;
-    private final Account account;
+    private Account account;
     private String name;
     private String firstLastName;
     private String secondLastName;
-    private String adress;
+    private String address;
     private String city;
     private String phone;
     
@@ -23,14 +23,14 @@ public class Client {
             String name, 
             String firstLastName, 
             String secondLastName, 
-            String adress, 
+            String address, 
             String city, 
             String phone, 
             Account account) {
         
         
         if (!validarRut(rut))   {
-            throw new IllegalArgumentException("RUT no válido");
+            throw new IllegalArgumentException("RUT no valido");
         }
               
               
@@ -38,7 +38,7 @@ public class Client {
         this.name = name;
         this.firstLastName = firstLastName;
         this.secondLastName = secondLastName;
-        this.adress = adress;
+        this.address = address;
         this.city = city;
         this.phone = phone;
         this.account = account;
@@ -79,6 +79,15 @@ public class Client {
         
     }
     
+    public boolean registrarCliente() {
+        if (validarRut(rut)) {
+            System.out.println("Cliente registrado correctamente: " + name + " " + firstLastName + " " + secondLastName);
+            return true;
+        }
+        return false;
+    }
+           
+           
     //Getters y setter
         
     public String getRut() {
@@ -97,8 +106,8 @@ public class Client {
         return secondLastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
     public String getCity() {
@@ -125,8 +134,8 @@ public class Client {
         this.secondLastName = secondLastName;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public void setCity(String city) {
