@@ -4,6 +4,8 @@
  */
 package poo_01;
 
+import poo_01.views.Menu;
+
 /**
  *
  * @author Andrea
@@ -15,7 +17,12 @@ public class POO_01 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //eliminando mensajes verificando token
+        System.out.println("************************");
+        System.out.println("      Bank Boston       ");
+        System.out.println("************************");
+        
+        Menu menu = new Menu();
+        menu.mostrarMenu();
     }
     
 }
