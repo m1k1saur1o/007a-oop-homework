@@ -165,5 +165,16 @@ public class Menu {
         }
         
     }
+    
+    private void consultarSaldo(){
+        if(clienteActual == null){
+            System.out.println("Primero debes registrar un cliente.");
+            return;
+        }
+        System.out.println("Saldo actual $ " + clienteActual.getAccount().getBalance());
+    }
+    
+    
+    
      
 }
