@@ -98,17 +98,17 @@ public class Menu {
         String city = scanner.nextLine();
         System.out.print("Ingrese telefono: ");
         String phone = scanner.nextLine();
-        System.out.print("Ingrese N cuenta corriente (9 digitos): ");
-        String accountNumber = scanner.nextLine(); 
+        
+        String accountNumber; 
         
         while (true) {
-            System.out.print("Ingrese N cuenta corriente (9 dígitos): ");
+            System.out.print("Ingrese N cuenta corriente (9 digitos): ");
              accountNumber = scanner.nextLine();
     
             if (accountNumber.length() == 9 && accountNumber.matches("\\d+")) {
-                break; // válido, salimos del ciclo
+                break;  
             } else {
-                System.out.println("Error: El número de cuenta debe tener exactamente 9 dígitos numéricos. Intenta de nuevo, mi amor 🥺");
+                System.out.println("Error: El numero de cuenta debe tener exactamente 9 digitos numericos.");
             }
         }
         
