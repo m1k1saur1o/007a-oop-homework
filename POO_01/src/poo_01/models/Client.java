@@ -49,7 +49,7 @@ public class Client {
         if (rut == null || rut.isEmpty()) {
             return false;
         }
-        return rut.length() == 9;
+        return rut.length() >= 11 && rut.length() <=12;
     }
     
         public boolean agregarCuenta(String accountNumber) {
@@ -66,12 +66,12 @@ public class Client {
         
     
        public void mostrarInformacion() {
-        System.out.println("========== INFORMACIÓN DEL CLIENTE ==========");
+        System.out.println("========== INFORMACION DEL CLIENTE ==========");
         System.out.println("RUT: " + this.rut);
         System.out.println("Nombre completo: " + name + " " + firstLastName);
         
         if (this.account != null) {
-            System.out.println("\n========== INFORMACIÓN DE LA CUENTA ==========");
+            System.out.println("\n========== INFORMACION DE LA CUENTA ==========");
             this.account.mostrarInformacion();
         } else {
             System.out.println("\nEl cliente no tiene cuenta activa");
