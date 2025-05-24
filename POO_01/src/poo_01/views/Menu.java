@@ -125,5 +125,23 @@ public class Menu {
         System.out.println();
         clienteActual.mostrarInformacion();
     }   
+    
+    private void agregarDeposito(){
+        if(clienteActual == null){
+            System.out.println("Primero debes registrar un cliente.");
+            return;
+        }
+        System.out.println("Ingrese monto a depositar:");
+        int monto = Integer.parseInt(scanner.nextLine());
+        
+        if(monto<=0){
+            System.out.println("El monto debe ser mayor a cero.");
+            return;
+        }
+        
+        clienteActual.getAccount().deposit(monto);
+        System.out.println("Depósito exitoso. Saldo actual: $" + clienteActual.getAccount().getBalance() );
+    }
+        
      
 }
