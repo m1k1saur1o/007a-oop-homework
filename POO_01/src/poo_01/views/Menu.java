@@ -140,7 +140,7 @@ public class Menu {
         }
         
         clienteActual.getAccount().deposit(monto);
-        System.out.println("Depósito exitoso. Saldo actual: $" + clienteActual.getAccount().getBalance() );
+        System.out.println("Deposito exitoso. Saldo actual: $" + clienteActual.getAccount().getBalance() );
     }
         
     private void realizarGiro(){
