@@ -46,10 +46,16 @@ public class Client {
 
     
     private boolean validarRut(String rut) {
-        if (rut == null || rut.isEmpty()) {
+         if (rut == null || rut.isEmpty()) {
             return false;
         }
-        return rut.length() >= 11 && rut.length() <=12;
+        if (rut.length() != 11 && rut.length() != 12) {
+            return false;
+        }
+        if (!rut.matches("\\d{1,2}\\.\\d{3}\\.\\d{3}[-][0-9kK]{1}")) {
+            return false;
+        }      
+        return true;
     }
     
         public boolean agregarCuenta(String accountNumber) {
