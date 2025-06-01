@@ -58,17 +58,34 @@ public class Client {
         return true;
     }
     
-        public boolean agregarCuenta(String accountNumber) {
+        public boolean agregarCuenta(String accountNumber, String tipoCuenta) {
         if (this.account != null)   {
             System.out.println("El cliente ya tiene una cuenta activa");
             return false;
         }
         
-        this.account = new Account(accountNumber);
-        System.out.println("Reserva agregada correctamente");
+        //this.account = new Account(accountNumber);
+        
+        switch (tipoCuenta.toLowerCase()) {
+            case "corriente":
+                this.account = new CuentaCorriente(accountNumber);
+                break;
+            case "ahorro":
+                this.account = new CuentaAhorro(accountNumber);
+                break;
+            case "credito":
+                this.account = new CuentaCredito(accountNumber);
+                break;
+            default:
+                System.out.println("Tipo de cuenta no reconocido");
+                return false;
+        }
+
+        System.out.println("Cuenta agregada correctamente");
         return true;
     }
-        
+       
+           
         
     
        public void mostrarInformacion() {
