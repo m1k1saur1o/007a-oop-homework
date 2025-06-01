@@ -8,7 +8,7 @@ package poo_01.models;
  *
  * @author m1k1
  */
-public class Client {
+public class Client implements interfaces.InfoCliente {
     private final String rut;
     private Account account;
     private String name;
@@ -64,7 +64,7 @@ public class Client {
             return false;
         }
         
-        //this.account = new Account(accountNumber);
+        //instanciación según tipo de Cuenta
         
         switch (tipoCuenta.toLowerCase()) {
             case "corriente":
@@ -88,7 +88,7 @@ public class Client {
            
         
     
-       public void mostrarInformacion() {
+       public void mostrarDatosCliente() {
         System.out.println("========== INFORMACION DEL CLIENTE ==========");
         System.out.println("RUT: " + this.rut);
         System.out.println("Nombre completo: " + name + " " + firstLastName);
