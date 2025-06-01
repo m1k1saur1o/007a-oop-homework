@@ -9,8 +9,8 @@ package poo_01.models;
  * @author m1k1
  */
 public abstract class Account {
-    private final String accountNumber;
-    private int balance;
+    final String accountNumber;
+    protected int balance;
     
    //Constructor Principal    
 
