@@ -36,11 +36,6 @@ public abstract class Account {
         this.balance = balanceInicial;
     }
     
-    public void mostrarInformacion() {
-        System.out.println("Numero de cuenta: " + this.accountNumber);
-        System.out.println("Saldo Actual: " + this.balance);
-    }
-    
     public boolean hacerGiro(int monto){
         if(monto <= balance){
             balance -= monto;
@@ -68,5 +63,7 @@ public abstract class Account {
     
     //Metodo abstracto que cada tipo de cuenta implementara de forma especifica
     public abstract void realizarOperacion();
+    //Metodo para mostrar informacion de la cuenta
+    public abstract void mostrarInformacion();
     
 }

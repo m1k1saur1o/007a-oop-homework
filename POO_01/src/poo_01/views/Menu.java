@@ -27,9 +27,10 @@ public class Menu {
 
 
     public Menu() {
-        scanner = new Scanner(System.in);
-        bankAccountManager = BankAccountManager.getInstance();
-        clienteActual = null;
+        this.scanner = new Scanner(System.in);
+        this.bankAccountManager = BankAccountManager.getInstance();
+        this.menuServices = new MenuServices();
+        this.clienteActual = null;
     }   
     
      public void mostrarMenu() {
@@ -53,7 +54,7 @@ public class Menu {
             
             switch (opcion) {
                 case 1:
-                    menuServices.registrarCliente(bankAccountManager, scanner, clienteActual);
+                    clienteActual = menuServices.registrarCliente(bankAccountManager, scanner, clienteActual);
                     break;
                 case 2:
                     menuServices.verDatosCliente(clienteActual);

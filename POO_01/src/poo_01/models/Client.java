@@ -9,6 +9,7 @@ package poo_01.models;
  * @author m1k1
  */
 public class Client implements interfaces.InfoCliente {
+
     private final String rut;
     private Account account;
     private String name;
@@ -17,23 +18,21 @@ public class Client implements interfaces.InfoCliente {
     private String address;
     private String city;
     private String phone;
-    
+
     public Client(
-            String rut, 
-            String name, 
-            String firstLastName, 
-            String secondLastName, 
-            String address, 
-            String city, 
-            String phone, 
+            String rut,
+            String name,
+            String firstLastName,
+            String secondLastName,
+            String address,
+            String city,
+            String phone,
             Account account) {
-        
-        
-        if (!validarRut(rut))   {
+
+        if (!validarRut(rut)) {
             throw new IllegalArgumentException("RUT no valido");
         }
-              
-              
+
         this.rut = rut;
         this.name = name;
         this.firstLastName = firstLastName;
@@ -44,9 +43,8 @@ public class Client implements interfaces.InfoCliente {
         this.account = account;
     }
 
-    
     private boolean validarRut(String rut) {
-         if (rut == null || rut.isEmpty()) {
+        if (rut == null || rut.isEmpty()) {
             return false;
         }
         if (rut.length() != 11 && rut.length() != 12) {
@@ -54,18 +52,17 @@ public class Client implements interfaces.InfoCliente {
         }
         if (!rut.matches("\\d{1,2}\\.\\d{3}\\.\\d{3}[-][0-9kK]{1}")) {
             return false;
-        }      
+        }
         return true;
     }
-    
-        public boolean agregarCuenta(String accountNumber, String tipoCuenta) {
-        if (this.account != null)   {
+
+    public boolean agregarCuenta(String accountNumber, String tipoCuenta) {
+        if (this.account != null) {
             System.out.println("El cliente ya tiene una cuenta activa");
             return false;
         }
-        
+
         //instanciación según tipo de Cuenta
-        
         switch (tipoCuenta.toLowerCase()) {
             case "corriente":
                 this.account = new CuentaCorriente(accountNumber);
@@ -84,24 +81,22 @@ public class Client implements interfaces.InfoCliente {
         System.out.println("Cuenta agregada correctamente");
         return true;
     }
-       
-           
-        
-    
-       public void mostrarDatosCliente() {
+
+    @Override
+    public void mostrarDatosCliente() {
         System.out.println("========== INFORMACION DEL CLIENTE ==========");
         System.out.println("RUT: " + this.rut);
         System.out.println("Nombre completo: " + name + " " + firstLastName);
-        
+
         if (this.account != null) {
             System.out.println("\n========== INFORMACION DE LA CUENTA ==========");
             this.account.mostrarInformacion();
         } else {
             System.out.println("\nEl cliente no tiene cuenta activa");
         }
-        
+
     }
-    
+
     public boolean registrarCliente() {
         if (validarRut(rut)) {
             System.out.println("Cliente registrado correctamente: " + name + " " + firstLastName + " " + secondLastName);
@@ -109,10 +104,8 @@ public class Client implements interfaces.InfoCliente {
         }
         return false;
     }
-           
-           
+
     //Getters y setter
-        
     public String getRut() {
         return rut;
     }
