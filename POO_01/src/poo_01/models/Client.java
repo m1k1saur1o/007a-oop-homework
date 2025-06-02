@@ -29,10 +29,6 @@ public class Client implements interfaces.InfoCliente {
             String phone,
             Account account) {
 
-        if (!validarRut(rut)) {
-            throw new IllegalArgumentException("RUT no valido");
-        }
-
         this.rut = rut;
         this.name = name;
         this.firstLastName = firstLastName;
@@ -41,19 +37,6 @@ public class Client implements interfaces.InfoCliente {
         this.city = city;
         this.phone = phone;
         this.account = account;
-    }
-
-    private boolean validarRut(String rut) {
-        if (rut == null || rut.isEmpty()) {
-            return false;
-        }
-        if (rut.length() != 11 && rut.length() != 12) {
-            return false;
-        }
-        if (!rut.matches("\\d{1,2}\\.\\d{3}\\.\\d{3}[-][0-9kK]{1}")) {
-            return false;
-        }
-        return true;
     }
 
     public boolean agregarCuenta(String accountNumber, String tipoCuenta) {
@@ -95,14 +78,6 @@ public class Client implements interfaces.InfoCliente {
             System.out.println("\nEl cliente no tiene cuenta activa");
         }
 
-    }
-
-    public boolean registrarCliente() {
-        if (validarRut(rut)) {
-            System.out.println("Cliente registrado correctamente: " + name + " " + firstLastName + " " + secondLastName);
-            return true;
-        }
-        return false;
     }
 
     //Getters y setter

@@ -9,6 +9,7 @@ import poo_01.models.Client;
 import poo_01.managers.BankAccountManager;
 import poo_01.factories.AccountFactory;
 import poo_01.models.Account;
+import poo_01.validators.ValidationService;
 
 /**
  *
@@ -18,11 +19,20 @@ public class MenuServices {
 
     public MenuServices() {
     }
-    
+
     public Client registrarCliente(BankAccountManager bankAccountManager, Scanner scanner, Client client) {
         System.out.println("\n===== REGISTRO DE CLIENTE =====");
-        System.out.print("Ingrese RUT: ");
-        String rut = scanner.nextLine();
+        
+        String rut;
+        while (true) {
+            System.out.print("Ingrese RUT: ");
+            rut = scanner.nextLine();
+            if (ValidationService.validateRut(rut)) {
+                break;
+            } else {
+                System.out.println("Error: Ingrese un rut valido.");
+            }
+        }
 
         // Verificar si el cliente ya existe
         if (bankAccountManager.buscarCliente(rut) != null) {
@@ -49,7 +59,7 @@ public class MenuServices {
             System.out.print("Ingrese N cuenta corriente (9 digitos): ");
             accountNumber = scanner.nextLine();
 
-            if (accountNumber.length() == 9 && accountNumber.matches("\\d+")) {
+            if (ValidationService.validateAccountNumber(accountNumber)) {
                 break;
             } else {
                 System.out.println("Error: El numero de cuenta debe tener exactamente 9 digitos numericos.");
@@ -58,26 +68,22 @@ public class MenuServices {
 
         String tipoDeCuenta;
         Account account;
-        
+
         while (true) {
             System.out.print("Ingrese tipo de cuenta (Ahorro o Corriente o Credito): ");
             tipoDeCuenta = scanner.nextLine();
-            if (tipoDeCuenta.toLowerCase().equals("ahorro")
-                    || tipoDeCuenta.toLowerCase().equals("corriente")
-                    || tipoDeCuenta.toLowerCase().equals("credito")) {
-                account = AccountFactory.createAccount(tipoDeCuenta.toLowerCase(), accountNumber);   
+            if (ValidationService.validateAccountType(tipoDeCuenta.toLowerCase())) {
+                account = AccountFactory.createAccount(tipoDeCuenta.toLowerCase(), accountNumber);
                 break;
             } else {
                 System.out.println("Error: Ingrese un tipo de cuenta valido.");
             }
         }
-        
-        
-        
+
         try {
             Client nuevoCliente = new Client(rut, name, firstLastName, secondLastName, address, city, phone, account);
-            if (nuevoCliente.registrarCliente() && bankAccountManager.agregarCliente(nuevoCliente)) {
-                System.out.println("Cliente registrado exitosamente");
+            if (bankAccountManager.agregarCliente(nuevoCliente)) {
+                System.out.println("Cliente registrado correctamente: " + name + " " + firstLastName + " " + secondLastName);
                 return nuevoCliente;
             }
         } catch (IllegalArgumentException e) {
