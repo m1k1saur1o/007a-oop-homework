@@ -9,8 +9,8 @@ package poo_01.models;
  * @author m1k1
  */
 public abstract class Account {
-    private final String accountNumber;
-    private int balance;
+    final String accountNumber;
+    protected int balance;
     
    //Constructor Principal    
 
@@ -34,11 +34,6 @@ public abstract class Account {
         }
         this.accountNumber = accountNumber;
         this.balance = balanceInicial;
-    }
-    
-    public void mostrarInformacion() {
-        System.out.println("Numero de cuenta: " + this.accountNumber);
-        System.out.println("Saldo Actual: " + this.balance);
     }
     
     public boolean hacerGiro(int monto){
@@ -68,5 +63,7 @@ public abstract class Account {
     
     //Metodo abstracto que cada tipo de cuenta implementara de forma especifica
     public abstract void realizarOperacion();
+    //Metodo para mostrar informacion de la cuenta
+    public abstract void mostrarInformacion();
     
 }

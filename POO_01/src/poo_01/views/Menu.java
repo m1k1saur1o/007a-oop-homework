@@ -8,6 +8,7 @@ import java.util.Scanner;
 import poo_01.managers.BankAccountManager;
 import poo_01.models.Account;
 import poo_01.models.Client;
+import poo_01.services.MenuServices;
 
 /**
  *
@@ -22,12 +23,14 @@ public class Menu {
     private final Scanner scanner;
     private final BankAccountManager bankAccountManager;
     private Client clienteActual;
+    private MenuServices menuServices;
 
 
     public Menu() {
-        scanner = new Scanner(System.in);
-        bankAccountManager = BankAccountManager.getInstance();
-        clienteActual = null;
+        this.scanner = new Scanner(System.in);
+        this.bankAccountManager = BankAccountManager.getInstance();
+        this.menuServices = new MenuServices();
+        this.clienteActual = null;
     }   
     
      public void mostrarMenu() {
@@ -51,19 +54,19 @@ public class Menu {
             
             switch (opcion) {
                 case 1:
-                    registrarCliente();
+                    clienteActual = menuServices.registrarCliente(bankAccountManager, scanner, clienteActual);
                     break;
                 case 2:
-                    verDatosCliente();
+                    menuServices.verDatosCliente(clienteActual);
                     break;
                 case 3:
-                    agregarDeposito();
+                    menuServices.agregarDeposito(clienteActual, scanner);
                     break;
                 case 4:
-                    realizarGiro();
+                    menuServices.realizarGiro(clienteActual, scanner);
                     break;
                 case 5:
-                    consultarSaldo();
+                    menuServices.consultarSaldo(clienteActual);
                     break;
                 case 6:
                     System.out.println("Gracias por usar el sistema de Bank Boston.");
@@ -75,118 +78,6 @@ public class Menu {
         } while (opcion != 6);
     }
      
-    private void registrarCliente() {
-        System.out.println("\n===== REGISTRO DE CLIENTE =====");
-        System.out.print("Ingrese RUT: ");
-        String rut = scanner.nextLine();
-        
-        // Verificar si el cliente ya existe
-        if (bankAccountManager.buscarCliente(rut) != null) {
-            System.out.println("Error: Ya existe un cliente con ese RUT");
-            return;
-        }
-        
-        System.out.print("Ingrese nombre: ");
-        String name = scanner.nextLine();
-        System.out.print("Ingrese apellido paterno: ");
-        String firstLastName = scanner.nextLine();
-        System.out.print("Ingrese apellido materno: ");
-        String secondLastName = scanner.nextLine();
-        System.out.print("Ingrese domicilio: ");
-        String address = scanner.nextLine();
-        System.out.print("Ingrese comuna: ");
-        String city = scanner.nextLine();
-        System.out.print("Ingrese telefono: ");
-        String phone = scanner.nextLine();
-        
-        String accountNumber; 
-        
-        while (true) {
-            System.out.print("Ingrese N cuenta corriente (9 digitos): ");
-             accountNumber = scanner.nextLine();
-    
-            if (accountNumber.length() == 9 && accountNumber.matches("\\d+")) {
-                break;  
-            } else {
-                System.out.println("Error: El numero de cuenta debe tener exactamente 9 digitos numericos.");
-            }
-        }
-        
-        
-        Account account = new Account(accountNumber);
-        
-        try {
-            Client nuevoCliente = new Client( rut, name, firstLastName, secondLastName, address, city, phone, account);
-            if (nuevoCliente.registrarCliente() && bankAccountManager.agregarCliente(nuevoCliente)) {
-                System.out.println("Cliente registrado exitosamente");
-                clienteActual = nuevoCliente;
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-     
-     
-    //opcion2 
-    private void verDatosCliente() {
-        if (clienteActual == null) {
-            System.out.println("Primero debe registrar un cliente");
-            return;
-        }
-        
-        System.out.println();
-        clienteActual.mostrarInformacion();
-    }   
-    
-    private void agregarDeposito(){
-        if(clienteActual == null){
-            System.out.println("Primero debes registrar un cliente.");
-            return;
-        }
-        System.out.println("Ingrese monto a depositar:");
-        int monto = Integer.parseInt(scanner.nextLine());
-        
-        if(monto<=0){
-            System.out.println("El monto debe ser mayor a cero.");
-            return;
-        }
-        
-        clienteActual.getAccount().deposit(monto);
-        System.out.println("Deposito exitoso. Saldo actual: $" + clienteActual.getAccount().getBalance() );
-    }
-        
-    private void realizarGiro(){
-        if(clienteActual == null){
-            System.out.println("Primero debes registrar un cliente.");
-        return;      
-        }
-        
-        System.out.println("Ingrese un monto a retirar: ");
-        int monto = Integer.parseInt(scanner.nextLine());
-        
-        if(monto<=0){
-            System.out.println("El monto debe ser mayor a cero.");
-            return;
-        }
-        
-        boolean exito = clienteActual.getAccount().hacerGiro(monto);
-        if(exito){
-            System.out.println("Giro realizado. Saldo actual $ " + clienteActual.getAccount().getBalance() );
-        } else{
-              System.out.println("Fondos insuficientes. Saldo actual $ " + clienteActual.getAccount().getBalance() );
-        }
-        
-    }
-    
-    private void consultarSaldo(){
-        if(clienteActual == null){
-            System.out.println("Primero debes registrar un cliente.");
-            return;
-        }
-        System.out.println("Saldo actual $ " + clienteActual.getAccount().getBalance());
-    }
     
     
-    
-     
 }
