@@ -65,7 +65,7 @@ public class MenuServices {
             if (tipoDeCuenta.toLowerCase().equals("ahorro")
                     || tipoDeCuenta.toLowerCase().equals("corriente")
                     || tipoDeCuenta.toLowerCase().equals("credito")) {
-                account = AccountFactory.createAccount(tipoDeCuenta, accountNumber);   
+                account = AccountFactory.createAccount(tipoDeCuenta.toLowerCase(), accountNumber);   
                 break;
             } else {
                 System.out.println("Error: Ingrese un tipo de cuenta valido.");
